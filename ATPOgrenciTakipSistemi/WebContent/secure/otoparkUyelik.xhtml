@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/layout/layout.xhtml">
+
+		<ui:define name="content">
+			
+			<h:form id="frmUyelik">
+				<p:growl id="growl" life="6000" autoUpdate="true" showDetail="true" />
+
+				<!-- tblUye : Tüm üye listesi & tablosu  -->
+
+				<p:dataTable id="tblUye" widgetVar="tblUye" var="k" lazy="true"
+					reflow="true" value="#{uyeBean.lazy}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,100" rowKey="#{k.id}" >
+
+					<f:facet name="header">
+					<h2 style="height: 30px; color: white;" >Üyelik İşlemleri</h2>
+					<p:accordionPanel></p:accordionPanel>
+					</f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{k.id}" />
+					</p:column>
+
+					<p:column headerText="Araç" filterBy="#{k.arac.plaka}">
+						<h:outputText value="#{k.arac.plaka}" />
+					</p:column>
+
+					<p:column headerText="Kişi" filterBy="#{k.kisi.adSoyad}">
+						<h:outputText value="#{k.kisi.adSoyad}" />
+					</p:column>
+
+					<p:column headerText="Açıklama" filterBy="#{k.aciklama}">
+						<h:outputText value="#{k.aciklama}" />
+					</p:column>
+
+					<p:column headerText="Fiyat">
+						<h:outputText value="#{k.fiyat}" />
+					</p:column>
+
+					<p:column headerText="Üyelik Başlangıç Tarihi">
+						<h:outputText value="#{k.uyelikBaslamaTarihi}" />
+					</p:column>
+
+					<p:column headerText="Üyelik Bitiş Tarihi">
+						<h:outputText value="#{k.uyelikBitisTarihi}" />
+					</p:column>
+
+					<p:column headerText="İşlemler">
+						<p:commandButton icon="ui-icon-pencil"
+							update=":frmUyelik:dlgUyelik"
+							actionListener="#{uyeBean.seciliKayit(k.id)}"
+							oncomplete="PF('dlgUyelik').show()">
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{uyeBean.seciliyiSil(k.id)}"
+							update=":frmUyelik:tblUye">
+							<p:confirm header="Silme Onay" message="Kayıt Silinsin mi?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Evet" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Hayır" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+
+					</p:column>
+
+					<!-- FOOTER  -->
+					<f:facet name="footer">
+
+						<!-- Yeni üye kaydı butonu -->
+						<p:commandButton value="Yeni Üye Kaydı"
+							actionListener="#{uyeBean.yeni}" update=":frmUyelik:dlgUyelik"
+							oncomplete="PF('dlgUyelik').show()" />
+
+						<!-- Girilmiş olan filtre değerlerini temizle -->
+						<p:commandButton onclick="PF('tblUye').clearFilters()"
+							value="Filtreleri Temizle" />
+
+					</f:facet>
+
+				</p:dataTable>
+
+
+
+				<!-- dlgUyelik : Dialog Uyelik -->
+
+				<p:dialog id="dlgUyelik" widgetVar="dlgUyelik" responsive="true"
+					resizable="false" header="Uyelik Kaydı" modal="true"
+					position="center">
+
+					<p:panelGrid columns="2" layout="grid">
+
+						<p:outputLabel value="Araç plaka :"></p:outputLabel>
+						<p:autoComplete queryDelay="1000" value="#{uyeBean.uye.arac}"
+							converter="#{aracConverter}" minQueryLength="3"
+							completeMethod="#{uyeBean.aracAcomp}" var="arac"
+							itemLabel="#{arac.plaka}" itemValue="#{arac}"></p:autoComplete>
+										
+						<p:outputLabel value="Kişi :"></p:outputLabel>
+						<p:autoComplete queryDelay="1000" value="#{uyeBean.uye.kisi}"
+							converter="#{kisiConverter}" minQueryLength="3"
+							completeMethod="#{uyeBean.kisiAcomp}" var="kisi"
+							itemLabel="#{kisi.adSoyad}" itemValue="#{kisi}"></p:autoComplete>
+
+						<p:outputLabel value="Açıklama:"></p:outputLabel>
+						<p:inputText value="#{uyeBean.uye.aciklama}"></p:inputText>
+
+						<p:outputLabel value="Fiyat:"></p:outputLabel>
+						<p:inputText value="#{uyeBean.uye.fiyat}"></p:inputText>
+
+						<p:outputLabel value="Üyelik Başlama Tarihi:"></p:outputLabel>
+						<p:calendar value="#{uyeBean.uye.uyelikBaslamaTarihi}"></p:calendar>
+
+						<p:outputLabel value="Üyelik Bitiş Tarihi:"></p:outputLabel>
+						<p:calendar value="#{uyeBean.uye.uyelikBitisTarihi}"></p:calendar>
+
+						<p:outputLabel value="İl:"></p:outputLabel>
+						<p:selectOneMenu value="#{uyeBean.uye.il}" style="width:100px"
+							converter="#{ilConverter}">
+							<f:selectItems var="il" itemLabel="#{il.ad}" itemValue="#{il}"
+								value="#{yerlesimMBean.ilListesi}">
+							</f:selectItems>
+							<p:ajax listener="#{uyeBean.ilChange}" update="ilce" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="İlçe:"></p:outputLabel>
+						<p:selectOneMenu widgetVar="ilce" id="ilce"
+							value="#{uyeBean.uye.ilce}" style="width:100px"
+							converter="#{ilceConverter}">
+							<f:selectItems var="ilce" itemLabel="#{ilce.ad}"
+								itemValue="#{ilce}" value="#{yerlesimMBean.ilceListesi}">
+							</f:selectItems>
+						</p:selectOneMenu>
+
+						<p:commandButton value="iptal" onclick="PF('dlgUyelik').hide()"></p:commandButton>
+						<p:commandButton value="Kaydet" actionListener="#{uyeBean.kaydet}"
+							update=":frmUyelik:tblUye,:frmUyelik:dlgUyelik"
+							oncomplete="PF('dlgUyelik').hide()"></p:commandButton>
+					</p:panelGrid>
+
+				</p:dialog>
+
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+				<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					closable="false" resizable="false" showHeader="false">
+				    Yükleniyor...
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

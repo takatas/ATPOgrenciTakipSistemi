@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/layout/layout.xhtml">
+		<ui:define name="content">
+			<h2>Öğrenci Kayıt İşlemleri</h2>
+			<h:form id="frmKisi"
+				rendered="#{sessionController.hasAuth('YT0045')}">
+				<p:growl id="growl" life="6000" autoUpdate="true" showDetail="true" />
+
+				<p:dataTable id="tblKisi" widgetVar="tblKisi" var="k" lazy="true"
+					reflow="true" value="#{kisiBean.lazy}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,100" rowKey="#{k.id}">
+					<p:column headerText="Id" sortBy="#{k.id}">
+						<h:outputText value="#{k.id}" />
+					</p:column>
+
+					<p:column headerText="Ad" filterBy="#{k.ad}" sortBy="#{k.ad}">
+						<h:outputText value="#{k.ad}" />
+					</p:column>
+
+					<p:column headerText="Soyad" filterBy="#{k.soyad}"
+						sortBy="#{k.soyad}">
+						<h:outputText value="#{k.soyad}" />
+					</p:column>
+
+					<p:column headerText="TC" sortBy="#{k.tc}">
+						<h:outputText value="#{k.tc}" />
+					</p:column>
+
+					<p:column headerText="Baba Adı" filterBy="#{k.babaAdi}">
+						<h:outputText value="#{k.babaAdi}" />
+					</p:column>
+
+					<p:column headerText="Ana Adı" filterBy="#{k.anaAdi}">
+						<h:outputText value="#{k.anaAdi}" />
+					</p:column>
+
+					<p:column headerText="Telefon" filterBy="#{k.tel}">
+						<h:outputText value="#{k.tel}" />
+					</p:column>
+
+					<p:column headerText="Adres">
+						<h:outputText value="#{k.acikAdres}" />
+					</p:column>
+
+					<p:column headerText="İşlemler">
+						<p:commandButton icon="ui-icon-pencil" update=":frmKisi:dlgKisi"
+							actionListener="#{kisiBean.seciliKayit(k.id)}"
+							oncomplete="PF('dlgKisi').show()"></p:commandButton>
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{kisiBean.seciliyiSil(k.id)}"
+							update=":frmKisi:tblKisi">
+							<p:confirm header="Silme Onay" message="Kayıt Silinsin mi?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Evet" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Hayır" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton value="Yeni" actionListener="#{kisiBean.yeni}"
+							update=":frmKisi:dlgKisi" oncomplete="PF('dlgKisi').show()"></p:commandButton>
+						<p:commandButton value="Sync"
+							actionListener="#{kisiBean.senkronizasyon}"></p:commandButton>
+						<p:commandButton onclick="PF('tblKisi').clearFilters()"
+							value="Filtreleri Temizle" />
+						<p:commandButton action="#{kisiBean.raporAl(1)}" ajax="false"
+							value="PDF" />
+						<p:commandButton action="#{kisiBean.raporAl(2)}" ajax="false"
+							value="Excel" />
+						<p:commandButton action="#{kisiBean.raporAl(3)}" ajax="false"
+							value="Docx" />
+					</f:facet>
+				</p:dataTable>
+
+
+
+				<p:dialog id="dlgKisi" widgetVar="dlgKisi" responsive="true"
+					width="400" resizable="false" header="Öğrenci Kaydı" modal="true"
+					position="center">
+
+					<p:panelGrid columns="2" layout="grid">
+						<p:outputLabel value="Adı:"></p:outputLabel>
+						<p:inputText value="#{kisiBean.kisi.ad}"></p:inputText>
+
+						<p:outputLabel value="Soyadı :"></p:outputLabel>
+						<p:inputText value="#{kisiBean.kisi.soyad}"></p:inputText>
+
+						<p:outputLabel value="TC Kimlik No:"></p:outputLabel>
+						<p:inputMask value="#{kisiBean.kisi.tc}" mask="99999999999"></p:inputMask>
+
+						<p:outputLabel value="Ana Adı:"></p:outputLabel>
+						<p:inputText value="#{kisiBean.kisi.anaAdi}"></p:inputText>
+
+						<p:outputLabel value="Baba Adı:"></p:outputLabel>
+						<p:inputText value="#{kisiBean.kisi.babaAdi}"></p:inputText>
+
+						<p:outputLabel value="Doğum Tarihi :"></p:outputLabel>
+						<p:calendar locale="tr" value="#{kisiBean.kisi.dogumTarihi}"></p:calendar>
+						
+		        
+						<p:outputLabel for="phone" value="Telefon :" />
+						<p:inputMask id="phone" value="#{kisiBean.kisi.tel}" mask="(999) 999-9999" />
+
+						<p:outputLabel value="Adres :"></p:outputLabel>
+						<p:inputText value="#{kisiBean.kisi.acikAdres}"></p:inputText>
+
+					</p:panelGrid>
+					<f:facet name="footer">
+						<p:commandButton value="iptal" onclick="PF('dlgKisi').hide()"></p:commandButton>
+						<p:commandButton value="Kaydet"
+							actionListener="#{kisiBean.kaydet}"
+							update=":frmKisi:tblKisi,:frmKisi:dlgKisi"
+							oncomplete="PF('dlgKisi').hide()"></p:commandButton>
+					</f:facet>
+				</p:dialog>
+
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+				<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					closable="false" resizable="false" showHeader="false">
+				    Yükleniyor...
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>
