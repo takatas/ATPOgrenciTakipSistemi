@@ -28,7 +28,7 @@ public class AspectAuditer implements Serializable{
 	@Autowired
 	private SessionController sessionController;
 
-	@Before("execution(* com.vektorel.oot.util.BaseDao.save(..))")
+	@Before("execution(* com.takatas.ots.util.BaseDao.save(..))")
 	public void beforeSaving(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
 		if(args[0] instanceof EBase){
@@ -38,12 +38,12 @@ public class AspectAuditer implements Serializable{
 		}
 	}
 	
-//	@After("execution(* com.vektorel.oot.*.*.*(..))")
+//	@After("execution(* com.takatas.ots.*.*.*(..))")
 //	public void afterSaving(JoinPoint joinPoint) {
 //		System.out.println("afterSaving Çaðrýldý");
 //	}
 	
-	@Before("execution(* com.vektorel.oot.util.BaseDao.update(..))")
+	@Before("execution(* com.takatas.ots.util.BaseDao.update(..))")
 	public void beforeUpdating(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
 		if(args[0] instanceof EBase){

@@ -33,6 +33,6 @@
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="userServiceImpl" class="com.vektorel.oot.service.UserServiceImpl" />
+	<beans:bean id="userServiceImpl" class="com.takatas.ots.service.UserServiceImpl" />
 
 </beans:beans>

@@ -7,13 +7,13 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 		<system-event-listener>
-			<system-event-listener-class>com.vektorel.oot.util.ViewScopeCallbackRegistrer</system-event-listener-class>
+			<system-event-listener-class>com.takatas.ots.util.ViewScopeCallbackRegistrer</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
 			<source-class>javax.faces.component.UIViewRoot</source-class>
 		</system-event-listener>
 
 		<system-event-listener>
-			<system-event-listener-class>com.vektorel.oot.util.ViewScopeCallbackRegistrer</system-event-listener-class>
+			<system-event-listener-class>com.takatas.ots.util.ViewScopeCallbackRegistrer</system-event-listener-class>
 			<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
 			<source-class>javax.faces.component.UIViewRoot</source-class>
 		</system-event-listener>

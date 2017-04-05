@@ -22,12 +22,12 @@
 	
 	<mvc:annotation-driven/>
 
-	<context:component-scan base-package="com.vektorel" />
+	<context:component-scan base-package="com.takatas" />
 
 	<bean
 		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
-	<!-- <bean class="com.vektorel.oot.util.AspectAuditer" /> -->
+	<!-- <bean class="com.takatas.ots.util.AspectAuditer" /> -->
 
 	<bean id="dataSource" class="org.postgresql.jdbc3.Jdbc3PoolingDataSource">
 		<property name="serverName" value="localhost" />
@@ -42,7 +42,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.vektorel" />
+		<property name="packagesToScan" value="com.takatas" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -53,14 +53,14 @@
 		</property>
 	</bean>
 
-	<bean id="ayarlar" class="com.vektorel.oot.util.Ayarlar">
-		<property name="uygulamaAdi" value="Otopark Otomasyon Uygulaması" />
-		<property name="uygulamaAdresi" value="www.otoparkci.com" />
-		<property name="gelistiren" value="Vektörel Bilişim" />
+	<bean id="ayarlar" class="com.takatas.ots.util.Ayarlar">
+		<property name="uygulamaAdi" value="Öğrenci Takip Sistemi" />
+		<property name="uygulamaAdresi" value="www.ogrencitakip.com" />
+		<property name="gelistiren" value="Soner TAKATAŞ" />
 		<property name="versiyon" value="1.2.1" />
 	</bean>
 
-	<bean id="testAyar" class="com.vektorel.oot.util.TestAyar">
+	<bean id="testAyar" class="com.takatas.ots.util.TestAyar">
 		<constructor-arg name="testAyar" value="Test Ayar da Set Edildi" />
 	</bean>
 
@@ -68,7 +68,7 @@
 		<property name="scopes">
 			<map>
 				<entry key="view">
-					<bean class="com.vektorel.oot.util.ViewScope" />
+					<bean class="com.takatas.ots.util.ViewScope" />
 				</entry>
 			</map>
 		</property>
@@ -83,9 +83,9 @@
 
 	<task:annotation-driven />
 	
-	<bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter">
-		<property name="baseAddress" value="http://localhost:8092/" />
+<!-- 	<bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"> -->
+<!-- 		<property name="baseAddress" value="http://localhost:8092/" /> -->
 		
-	</bean>
+<!-- 	</bean> -->
 
 </beans>
