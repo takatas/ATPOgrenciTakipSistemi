@@ -1,4 +1,4 @@
-package com.vektorel.test;
+package com.takatas.ots.test;
 
 import tr.gov.nvi.tckimlik.ws.KPSPublic;
 import tr.gov.nvi.tckimlik.ws.KPSPublicSoap;
