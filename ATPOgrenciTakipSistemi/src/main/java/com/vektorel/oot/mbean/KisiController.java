@@ -21,7 +21,7 @@ import com.vektorel.oot.util.RptEnum;
 
 /**
  * 
- * @author temelt
+ * @author takatas
  *
  */
 @Controller("kisiBean")

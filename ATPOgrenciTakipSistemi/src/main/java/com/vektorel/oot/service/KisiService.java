@@ -22,7 +22,7 @@ import com.vektorel.oot.util.PagingResult;
 
 /**
  * 
- * @author temelt
+ * @author takatas
  * 
  */
 @Service

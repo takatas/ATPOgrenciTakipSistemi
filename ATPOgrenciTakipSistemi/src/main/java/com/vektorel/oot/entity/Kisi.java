@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,7 +17,7 @@ import javax.persistence.Transient;
 
 /**
  * 
- * @author temelt
+ * @author takatas
  * 
  */
 @Entity
@@ -38,6 +41,14 @@ public class Kisi extends EBase {
 	private String tel;
 	private String alternatifTelefon;
 	private String mail;
+	private String lisansNo;
+	private String meslek;
+	private Okul okul;
+	private KisiTip kisiTip;
+	private OgrenciTip ogrenciTip;
+	private KanGrubu kanGrubu;
+	private Date kayitTarihi;
+	
 	@SuppressWarnings("unused")
 	private String adSoyad;
 	@SuppressWarnings("unused")
@@ -142,6 +153,68 @@ public class Kisi extends EBase {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+	
+	@Column(name = "lisans_no", length = 50)
+	public String getLisansNo() {
+		return lisansNo;
+	}
+
+	public void setLisansNo(String lisansNo) {
+		this.lisansNo = lisansNo;
+	}
+
+	@Column(name = "meslek", length = 100)	
+	public String getMeslek() {
+		return meslek;
+	}
+
+	public void setMeslek(String meslek) {
+		this.meslek = meslek;
+	}
+
+	@JoinColumn(name = "mail_adres")
+	@ManyToOne(fetch = FetchType.LAZY)
+	public Okul getOkul() {
+		return okul;
+	}
+
+	public void setOkul(Okul okul) {
+		this.okul = okul;
+	}
+
+	public KisiTip getKisiTip() {
+		return kisiTip;
+	}
+
+	public void setKisiTip(KisiTip kisiTip) {
+		this.kisiTip = kisiTip;
+	}
+
+	public OgrenciTip getOgrenciTip() {
+		return ogrenciTip;
+	}
+
+	public void setOgrenciTip(OgrenciTip ogrenciTip) {
+		this.ogrenciTip = ogrenciTip;
+	}
+
+	public KanGrubu getKanGrubu() {
+		return kanGrubu;
+	}
+
+	public void setKanGrubu(KanGrubu kanGrubu) {
+		this.kanGrubu = kanGrubu;
+	}
+
+	@Column(name = "kayit_tarihi")
+	@Temporal(TemporalType.DATE)
+	public Date getKayitTarihi() {
+		return kayitTarihi;
+	}
+
+	public void setKayitTarihi(Date kayitTarihi) {
+		this.kayitTarihi = kayitTarihi;
 	}
 
 	@Transient
