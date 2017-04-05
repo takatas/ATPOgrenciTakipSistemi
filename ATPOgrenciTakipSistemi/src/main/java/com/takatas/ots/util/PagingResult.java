@@ -1,0 +1,32 @@
+package com.takatas.ots.util;
+
+import java.util.List;
+
+/**
+ * 
+ * @author temelt
+ *
+ */
+@SuppressWarnings("rawtypes")
+public class PagingResult {
+
+	private List list;
+	private Long rowCount;
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	public Long getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(Long rowCount) {
+		this.rowCount = rowCount;
+	}
+
+}
