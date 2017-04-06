@@ -105,26 +105,26 @@ public class KisiService {
 		Session session = baseDao.getCurrentSession();
 		Criteria criteria = session.createCriteria(Kisi.class);
 
-		if (filters.containsKey("ad")) {
-			criteria.add(Restrictions.ilike("ad", filters.get("ad").toString(),
-					MatchMode.ANYWHERE));
-		}
-
-		if (filters.containsKey("anaAdi")) {
-			criteria.add(Restrictions.ilike("anaAdi", filters.get("anaAdi")
-					.toString(), MatchMode.ANYWHERE));
-		}
-
-		if (filters.containsKey("soyad")) {
-			criteria.add(Restrictions.ilike("soyad", filters.get("soyad")
-					.toString(), MatchMode.ANYWHERE));
-		}
-
-		if (filters.containsKey("il.ad")) {
-			Criteria crt = criteria.createAlias("il", "ilAls");
-			crt.add(Restrictions.ilike("ilAls.ad", filters.get("il.ad")
-					.toString(), MatchMode.ANYWHERE));
-		}
+//		if (filters.containsKey("ad")) {
+//			criteria.add(Restrictions.ilike("ad", filters.get("ad").toString(),
+//					MatchMode.ANYWHERE));
+//		}
+//
+//		if (filters.containsKey("anaAdi")) {
+//			criteria.add(Restrictions.ilike("anaAdi", filters.get("anaAdi")
+//					.toString(), MatchMode.ANYWHERE));
+//		}
+//
+//		if (filters.containsKey("soyad")) {
+//			criteria.add(Restrictions.ilike("soyad", filters.get("soyad")
+//					.toString(), MatchMode.ANYWHERE));
+//		}
+//
+//		if (filters.containsKey("il.ad")) {
+//			Criteria crt = criteria.createAlias("il", "ilAls");
+//			crt.add(Restrictions.ilike("ilAls.ad", filters.get("il.ad")
+//					.toString(), MatchMode.ANYWHERE));
+//		}
 
 		// Ýlçesinin ilinin adýný sorgulamak için
 		// if(filters.containsKey("il.ad")){

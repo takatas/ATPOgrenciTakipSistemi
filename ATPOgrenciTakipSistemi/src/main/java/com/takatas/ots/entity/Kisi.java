@@ -32,15 +32,15 @@ public class Kisi extends EBase {
 
 	private String ad;
 	private String soyad;
-	private Date dogumTarihi;
 	private Long tc;
-	private String babaAdi;
 	private String anaAdi;
+	private String babaAdi;
 	private Cinsiyet cinsiyet;
-	private String acikAdres;
+	private Date dogumTarihi;
 	private String tel;
 	private String alternatifTelefon;
 	private String mail;
+	private String acikAdres;
 	private String lisansNo;
 	private String meslek;
 	private Okul okul;
@@ -173,7 +173,7 @@ public class Kisi extends EBase {
 		this.meslek = meslek;
 	}
 
-	@JoinColumn(name = "mail_adres")
+	@JoinColumn(name = "okul_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	public Okul getOkul() {
 		return okul;

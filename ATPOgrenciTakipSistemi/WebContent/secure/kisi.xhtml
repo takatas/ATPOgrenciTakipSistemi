@@ -104,6 +104,13 @@
 						<p:outputLabel value="Baba Adı:"></p:outputLabel>
 						<p:inputText value="#{kisiBean.kisi.babaAdi}"></p:inputText>
 
+						<p:outputLabel value="Cinsiyet:"></p:outputLabel>
+						<p:selectOneMenu value="#{kisiBean.kisi.cinsiyet}" style="width:125px">
+				            <f:selectItem itemLabel="Erkek" itemValue="ERKEK" />
+				            <f:selectItem itemLabel="Kadın" itemValue="KADIN" />
+				            <f:selectItem itemLabel="Diğer" itemValue="DIGER" />
+						</p:selectOneMenu>						
+
 						<p:outputLabel value="Doğum Tarihi :"></p:outputLabel>
 						<p:calendar locale="tr" value="#{kisiBean.kisi.dogumTarihi}"></p:calendar>
 						
@@ -111,8 +118,45 @@
 						<p:outputLabel for="phone" value="Telefon :" />
 						<p:inputMask id="phone" value="#{kisiBean.kisi.tel}" mask="(999) 999-9999" />
 
+						<p:outputLabel for="aphone" value="Alternatif Telefon :" />
+						<p:inputMask id="aphone" value="#{kisiBean.kisi.alternatifTelefon}" mask="(999) 999-9999" />
+						
+						<p:outputLabel value = "e-Mail Adres :"/>
+						<p:inputText value = "#{kisiBean.kisi.mail}"></p:inputText>
+
 						<p:outputLabel value="Adres :"></p:outputLabel>
 						<p:inputText value="#{kisiBean.kisi.acikAdres}"></p:inputText>
+
+						<p:outputLabel value = "Lisans No:"/>
+						<p:inputText value = "#{kisiBean.kisi.lisansNo}"></p:inputText>
+
+						<p:outputLabel value = "Meslek:"/>
+						<p:inputText value = "#{kisiBean.kisi.meslek}"></p:inputText>
+
+						<p:outputLabel value = "Okul Adı:"/>
+						<p:inputText value = "#{kisiBean.kisi.okul.okulAd}"></p:inputText>
+
+						<p:outputLabel value = "Sınıf:"/>
+						<p:inputText value = "#{kisiBean.kisi.okul.sinif}"></p:inputText>
+
+						<p:outputLabel value = "Okul No:"/>
+						<p:inputText value = "#{kisiBean.kisi.okul.okulNo}"></p:inputText>
+						
+						<p:outputLabel value="Kayıt Tipi"></p:outputLabel>
+						<p:selectOneMenu value="#{kisiBean.kisi.kisiTip}" style="width:125px">
+				            <f:selectItem itemLabel="Öğrenci" itemValue="OGRENCI" />
+				            <f:selectItem itemLabel="Antrenör" itemValue="ANTRENOR" />
+						</p:selectOneMenu>	
+						
+						<p:outputLabel value="Kan Grubu"></p:outputLabel>
+						<p:selectOneMenu value="#{kisiBean.kisi.kanGrubu}" style="width:125px">
+				            <f:selectItem itemLabel="A Rh(+)" itemValue="ARHPOZITIF" />
+				            <f:selectItem itemLabel="A Rh(-)" itemValue="ARHNEGATIF" />
+						</p:selectOneMenu>	
+						
+						<p:outputLabel value="Kayıt Tarihi :"></p:outputLabel>
+						<p:calendar locale="tr" value="#{kisiBean.kisi.kayitTarihi}"></p:calendar>
+						
 
 					</p:panelGrid>
 					<f:facet name="footer">
