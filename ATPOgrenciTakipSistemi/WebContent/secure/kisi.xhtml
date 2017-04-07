@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:composition template="/layout/layout.xhtml">
 		<ui:define name="content">
@@ -85,10 +86,10 @@
 
 
 				<p:dialog id="dlgKisi" widgetVar="dlgKisi" responsive="true"
-					width="400" resizable="false" header="Öğrenci Kaydı" modal="true"
+					width="800" resizable="false" header="Öğrenci Kaydı" modal="true"
 					position="center">
 
-					<p:panelGrid columns="2" layout="grid">
+					<p:panelGrid columns="4" layout="grid">
 						<p:outputLabel value="Adı:"></p:outputLabel>
 						<p:inputText value="#{kisiBean.kisi.ad}"></p:inputText>
 
@@ -132,15 +133,6 @@
 
 						<p:outputLabel value = "Meslek:"/>
 						<p:inputText value = "#{kisiBean.kisi.meslek}"></p:inputText>
-
-						<p:outputLabel value = "Okul Adı:"/>
-						<p:inputText value = "#{kisiBean.kisi.okul.okulAd}"></p:inputText>
-
-						<p:outputLabel value = "Sınıf:"/>
-						<p:inputText value = "#{kisiBean.kisi.okul.sinif}"></p:inputText>
-
-						<p:outputLabel value = "Okul No:"/>
-						<p:inputText value = "#{kisiBean.kisi.okul.okulNo}"></p:inputText>
 						
 						<p:outputLabel value="Kayıt Tipi"></p:outputLabel>
 						<p:selectOneMenu value="#{kisiBean.kisi.kisiTip}" style="width:125px">

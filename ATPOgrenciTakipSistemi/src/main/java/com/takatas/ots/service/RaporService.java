@@ -18,10 +18,10 @@ public class RaporService {
 
 	
 	private static final String CINSIYET_YIL_DAGILIMI=" Select " 
-													    +" cast(EXTRACT(YEAR FROM k.dogumtarihi) as integer ) yil ,  "
+													    +" cast(EXTRACT(YEAR FROM k.dogum_tarihi) as integer ) yil ,  "
 													    +" cast(cinsiyet as integer) , "
 													    +" cast(count(k.id)  as integer)  as sayisi "
-													    +"from gnl_kisi as k  group by k.cinsiyet, EXTRACT(YEAR FROM k.dogumtarihi) "
+													    +"from kisi as k  group by k.cinsiyet, EXTRACT(YEAR FROM k.dogum_tarihi) "
 													    +"order by yil,cinsiyet ";
 	
 	@Autowired

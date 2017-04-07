@@ -2,6 +2,7 @@ package com.takatas.ots.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -43,7 +44,7 @@ public class Kisi extends EBase {
 	private String acikAdres;
 	private String lisansNo;
 	private String meslek;
-	private Okul okul;
+	//private Okul okul;
 	private KisiTip kisiTip;
 	private OgrenciTip ogrenciTip;
 	private KanGrubu kanGrubu;
@@ -173,15 +174,15 @@ public class Kisi extends EBase {
 		this.meslek = meslek;
 	}
 
-	@JoinColumn(name = "okul_id")
-	@ManyToOne(fetch = FetchType.LAZY)
-	public Okul getOkul() {
-		return okul;
-	}
-
-	public void setOkul(Okul okul) {
-		this.okul = okul;
-	}
+//	@JoinColumn(name = "okul_id")
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	public Okul getOkul() {
+//		return okul;
+//	}
+//
+//	public void setOkul(Okul okul) {
+//		this.okul = okul;
+//	}
 
 	public KisiTip getKisiTip() {
 		return kisiTip;

@@ -19,6 +19,16 @@ public class Okul extends EBase {
 	private String sinif;
 	private String okulNo;
 
+	public Okul() {
+	}
+
+	public Okul(String okulAd, String sinif, String okulNo) {
+		super();
+		this.okulAd = okulAd;
+		this.sinif = sinif;
+		this.okulNo = okulNo;
+	}
+
 	@Column(name = "okul_ad", length = 100)
 	public String getOkulAd() {
 		return okulAd;

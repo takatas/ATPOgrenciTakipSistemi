@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.takatas.ots.entity.Kisi;
+import com.takatas.ots.entity.Okul;
 import com.takatas.ots.service.KisiService;
+import com.takatas.ots.service.OkulService;
 import com.takatas.ots.util.Ayarlar;
 import com.takatas.ots.util.OrderUtil;
 import com.takatas.ots.util.PagingResult;
@@ -40,6 +42,9 @@ public class KisiController implements Serializable{
 	private transient KisiService kisiService;
 	
 	@Autowired
+	private transient OkulService okulService;
+	
+	@Autowired
 	private transient MessageMBean messageMBean;
 	
 //	@Autowired
@@ -51,6 +56,7 @@ public class KisiController implements Serializable{
 	private Ayarlar ayarlar;
 	
 	private Kisi kisi;
+	private Okul okul;
 	private LazyDataModel<Kisi> lazy;
 
 	
@@ -108,6 +114,7 @@ public class KisiController implements Serializable{
 	
 	public void yeni() {
 		kisi=new Kisi();
+		okul = new Okul();
 	}
 
 //	public void ilChange() {
